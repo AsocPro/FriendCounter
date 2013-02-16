@@ -61,6 +61,10 @@ public class Friend
     }
     public Friend(String name, int age, boolean ageIsApprox)
     {
+		if(age < -1)
+		{
+			throw new InvalidParameterException;
+		}
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
@@ -72,6 +76,10 @@ public class Friend
     }
     public Friend(String name, int age, boolean ageIsApprox, int gender)
     {
+		if(age < -1 ¦¦ gender < -1 ¦¦ gender > 1)
+		{
+			throw new InvalidParameterException;
+		}
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
@@ -84,6 +92,10 @@ public class Friend
     public Friend(String name, int age, boolean ageIsApprox, int gender, 
             int quality, int cuteness)
     {
+    	if(age < -1 ¦¦ gender < -1 ¦¦ gender > 1 ¦¦ quality < -5 ¦¦ quality > 5 ¦¦ cuteness < -5 ¦¦ cuteness > 5)
+    	{
+        	throw new InvalidParameterException;
+    	}
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
