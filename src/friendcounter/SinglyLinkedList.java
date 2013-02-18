@@ -6,6 +6,16 @@
  * 
  * Description: This is the Singly Linked List class from the book.
  * It links Singly linked nodes together.
+ * 
+ * Modified from what is found in the book. 
+ * 
+ * Added public SinglyLinkedList findAll(E element)
+ * This method finds all elements in the list that are equals to the element passed in
+ * 
+ * Added public void printedFindAll(E element)
+ * This method is find all but instead of returning a singly linked list it prints found items.
+ * 
+ * Modified traverse() to print out in a list form with number identifying the nodes.
  */
 package friendcounter;
 
@@ -34,13 +44,15 @@ public class SinglyLinkedList <E>
     /** 
      * they use a visitor in the book but we will not implement
      * it all the way so we are going to print it all out.
+     * Prints the index number before each element.
      */
     public void traverse()
     {
         SLNode<E> cursor = head.getSuccessor();
-        
+        int index = 0;
         while(cursor != tail)
         {
+            System.out.print(index + "");
             System.out.println(cursor.getElement());
             //this is where we would have visited the node. 
             //but we are not doing visitors
@@ -77,6 +89,54 @@ public class SinglyLinkedList <E>
             }
         }
         return null;
+    }
+    /**
+     * Finds all the elements in a SLL
+     * @param element Element being searched for
+     * @return SinglyLinkedList of all found items.
+     */
+    public SinglyLinkedList findAll(E element)
+    {
+        SinglyLinkedList<E> list = new SinglyLinkedList<>();
+        SLNode<E> cursor = head.getSuccessor();
+        
+        while(cursor != tail)
+        {
+            if(cursor.getElement().equals(element))
+            {
+                list.addAtTail(cursor.getElement());
+            }
+            cursor = cursor.getSuccessor();
+        }
+        return list;
+    }
+    /**
+     * Prints all elements in the SLL that are equal to element
+     * @param element Element being searched for.
+     */
+    public void printedFindAll(E element)
+    {
+        String list = "";
+        int index = 0;
+        SLNode<E> cursor = head.getSuccessor();
+        
+        while(cursor != tail)
+        {
+            if(cursor.getElement().equals(element))
+            {
+                list = list + index + ": " + cursor.getElement() + "/n";
+            }
+            cursor = cursor.getSuccessor();
+            index++;
+        }
+        if(list.equals(""))
+        {
+            System.out.println("None Found");
+        }
+        else
+        {
+            System.out.println(list);
+        }
     }
     public void addAtHead(E element)
     {
