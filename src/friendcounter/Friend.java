@@ -291,6 +291,41 @@ public class Friend
     public String toString()
     {
         String friend = "";
+        friend = friend + "Name: " + name + "/t";
+        friend = friend + "Age: ";
+        if(age == -1)
+        {
+            friend = friend + "Unknown/t";
+        }
+        else
+        {
+            if(ageIsApprox)
+            {
+                friend = friend + " approx/t";
+            }
+         else
+            {
+                friend = friend + "/t";
+            }
+        }
+        friend = friend + "Gender: ";
+        switch(this.gender)
+        {
+            case -1:
+                friend = friend + "Unknown";
+                break;
+            case 0:
+                friend = friend + "Male";
+                break;
+            case 1:
+                friend = friend + "Female";
+                break;
+        }
+        return friend;
+    }
+    public String toStringDetails()
+    {
+        String friend = "";
         friend = friend + "Name: " + name + "/n";
         friend = friend + "Age: ";
         if(age == -1)
@@ -350,5 +385,80 @@ public class Friend
             friend = friend + "Not Family/n";
         }
         return friend;
+    }
+    /**
+     * Override equals() providing a friend that is close to the description.
+     *     If a parameter is unknown then it will count that parameter as equal
+     * @param object
+     * @return 
+     */
+    @Override
+    public boolean equals(Object object)
+    {
+        if(object == null)
+        {
+            return false;
+        } 
+        if(this == object)
+        {
+            return true;
+        } 
+        if(!(object instanceof Friend))
+        {
+            return false;
+        }
+        Friend other = (Friend)object;
+        if(!(this.getName().equals(other.getName()) || other.getName().equals("Unknown")))
+        {
+            return false;
+        }
+        if(ageIsApprox)
+        {
+            if(!(Math.abs(this.getAge()-other.getAge()) < 5))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(!(this.getAge() == other.getAge() || other.getAge() == -1))
+            {
+                return false;
+            }
+        }
+        if(!(this.getGender() == other.getGender() || other.getGender() == -1))
+        {
+            return false;
+        }
+        if(!(this.getCuteness() == other.getCuteness()))
+        {
+            return false;
+        }
+        if(!(this.getQuality() == other.getQuality()))
+        {
+            return false;
+        }
+        if(!(this.getRelationship() == other.getRelationship() || other.getRelationship() == -1))
+        {
+            return false;
+        }
+        if(!(this.isFamily() == other.isFamily()))
+        {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public int hashCode()
+    {
+        int result = 17;
+        result = 37 * result + name.hashCode();
+        result = 37 * result + age;
+        result = 37 * result + (ageIsApprox ? 0 : 1);
+        result = 37 * result + cuteness;
+        result = 37 * result + quality;
+        result = 37 * result + relationship;
+        result = 37 * result + (isFamily ? 0 : 1);
+        return result;
     }
 }
