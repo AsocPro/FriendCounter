@@ -140,14 +140,14 @@ public class SinglyLinkedList <E>
     }
     public void addAtHead(E element)
     {
-        SLNode<E> newNode = new SLNode<E>(element,null);
+        SLNode<E> newNode = new SLNode<>(element,null);
         newNode.setSuccessor(head.getSuccessor());
         head.setSuccessor(newNode);
         length++;
     }
     public void addAtTail(E element)
     {
-        SLNode<E> newNode = new SLNode<E>(element, null);
+        SLNode<E> newNode = new SLNode<>(element, null);
         if(length<0)
         {
             SLNode<E> lastNode = find(this.length-1);

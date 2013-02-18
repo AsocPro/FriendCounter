@@ -66,14 +66,34 @@ public class Friend
      * Constructor Specifying the name and age.
      * @param name Name of the friend
      * @param age Age in years. -1 = Unknown
+     */
+    public Friend(String name, int age)
+    {
+	if(age < -1)
+        {
+            throw new InvalidParameterException();
+        }
+        this.name = name;
+        this.age = age;
+        this.ageIsApprox = false;
+        this.gender = -1;
+        this.quality = 0;
+        this.cuteness = 0;
+        this.relationship = -1;
+        this.isFamily = false;
+    }
+    /**
+     * Constructor Specifying the name and age.
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
      * @param ageIsApprox True if the age is an approximation false if it isn't.
      */
     public Friend(String name, int age, boolean ageIsApprox)
     {
-		if(age < -1)
-		{
-			throw new InvalidParameterException();
-		}
+	if(age < -1)
+        {
+            throw new InvalidParameterException();
+        }
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
@@ -92,13 +112,35 @@ public class Friend
      */
     public Friend(String name, int age, boolean ageIsApprox, int gender)
     {
-		if(age < -1 || gender < -1 || gender > 1)
-		{
-			throw new InvalidParameterException();
-		}
+        if(age < -1 || gender < -1 || gender > 1)
+        {
+            throw new InvalidParameterException();
+        }
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
+        this.gender = gender;
+        this.quality = 0;
+        this.cuteness = 0;
+        this.relationship = -1;
+        this.isFamily = false;
+    }
+    /**
+     * Constructor Specifying the name, age, and gender.
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
+     */
+    public Friend(String name, int age, int gender)
+    {
+        if(age < -1 || gender < -1 || gender > 1)
+        {
+            throw new InvalidParameterException();
+        }
+        this.name = name;
+        this.age = age;
+        this.ageIsApprox = false;
         this.gender = gender;
         this.quality = 0;
         this.cuteness = 0;
@@ -283,7 +325,7 @@ public class Friend
     {
         return isFamily;
     }
-    public void setFamily(boolean isFamily)
+    public void isFamily(boolean isFamily)
     {
         this.isFamily = isFamily;
     }
