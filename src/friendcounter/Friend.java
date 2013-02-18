@@ -9,6 +9,9 @@
 package friendcounter;
 //Needs to change constructors and set methods to check for valid entry.
 
+import java.security.InvalidParameterException;
+
+
 /**
  *
  * @author zachary
@@ -46,7 +49,7 @@ public class Friend
     }
     /**
      * Constructor if Only the Name is known
-     * @param name 
+     * @param name Name of the friend.
      */
     public Friend(String name)
     {
@@ -59,11 +62,17 @@ public class Friend
         this.relationship = -1;
         this.isFamily = false;
     }
+    /**
+     * Constructor Specifying the name and age.
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     */
     public Friend(String name, int age, boolean ageIsApprox)
     {
 		if(age < -1)
 		{
-			throw new InvalidParameterException;
+			throw new InvalidParameterException();
 		}
         this.name = name;
         this.age = age;
@@ -74,11 +83,18 @@ public class Friend
         this.relationship = -1;
         this.isFamily = false;
     }
+    /**
+     * Constructor Specifying the name, age, and gender.
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
+     */
     public Friend(String name, int age, boolean ageIsApprox, int gender)
     {
-		if(age < -1 ¦¦ gender < -1 ¦¦ gender > 1)
+		if(age < -1 || gender < -1 || gender > 1)
 		{
-			throw new InvalidParameterException;
+			throw new InvalidParameterException();
 		}
         this.name = name;
         this.age = age;
@@ -89,12 +105,23 @@ public class Friend
         this.relationship = -1;
         this.isFamily = false;
     }
+    /**
+     * Constructor Specifying the name, age, and gender, quality and cuteness
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
+     * @param quality Quality of friendship. Scale from -5 to 5 where 0 is 
+     *     neutral, -5 is sworn Enemy and 5 is like a brother from another mother.
+     * @param cuteness Overall Cuteness. -5 to 5. 0 is the normal, -5 is looks like
+     *     a monster and 5 is having an angelic beauty
+     */
     public Friend(String name, int age, boolean ageIsApprox, int gender, 
             int quality, int cuteness)
     {
-    	if(age < -1 ¦¦ gender < -1 ¦¦ gender > 1 ¦¦ quality < -5 ¦¦ quality > 5 ¦¦ cuteness < -5 ¦¦ cuteness > 5)
+    	if(age < -1 || gender < -1 || gender > 1 || quality < -5 || quality > 5 || cuteness < -5 || cuteness > 5)
     	{
-        	throw new InvalidParameterException;
+        	throw new InvalidParameterException();
     	}
         this.name = name;
         this.age = age;
@@ -105,9 +132,26 @@ public class Friend
         this.relationship = -1;
         this.isFamily = false;
     }
+    /**
+     * Constructor specifying the name, age, gender, cuteness, quality and relationship status of the friend
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
+     * @param quality Quality of friendship. Scale from -5 to 5 where 0 is 
+     *     neutral, -5 is sworn Enemy and 5 is like a brother from another mother.
+     * @param cuteness Overall Cuteness. -5 to 5. 0 is the normal, -5 is looks like
+     *     a monster and 5 is having an angelic beauty
+     * @param relationship The relationship status of the friend. 0 is single, 
+     *     1 is in a relationship, 2 is married and -1 is unknown.
+     */
     public Friend(String name, int age, boolean ageIsApprox, int gender, 
             int quality, int cuteness, int relationship)
     {
+        if(age < -1 || gender < -1 || gender > 1 || quality < -5 || quality > 5 || cuteness < -5 || cuteness > 5 || relationship < -1 || relationship > 2)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.name = name;
         this.age = age;
         this.ageIsApprox = ageIsApprox;
@@ -117,10 +161,47 @@ public class Friend
         this.relationship = relationship;
         this.isFamily = false;
     }
+    /**
+     * Constructor specifying the name, age, gender, cuteness, quality and relationship status of the friend
+     * @param name Name of the friend
+     * @param age Age in years. -1 = Unknown
+     * @param ageIsApprox True if the age is an approximation false if it isn't.
+     * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
+     * @param quality Quality of friendship. Scale from -5 to 5 where 0 is 
+     *     neutral, -5 is sworn Enemy and 5 is like a brother from another mother.
+     * @param cuteness Overall Cuteness. -5 to 5. 0 is the normal, -5 is looks like
+     *     a monster and 5 is having an angelic beauty
+     * @param relationship The relationship status of the friend. 0 is single, 
+     *     1 is in a relationship, 2 is married and -1 is unknown.
+     * @param isFamily If the friend is a family member.
+     */
+    public Friend(String name, int age, boolean ageIsApprox, int gender, 
+            int quality, int cuteness, int relationship, boolean isFamily)
+    {
+        if(age < -1 || gender < -1 || gender > 1 || quality < -5 || quality > 5 || cuteness < -5 || cuteness > 5 || relationship < -1 || relationship > 2)
+    	{
+        	throw new InvalidParameterException();
+    	}
+        this.name = name;
+        this.age = age;
+        this.ageIsApprox = ageIsApprox;
+        this.gender = gender;
+        this.quality = quality;
+        this.cuteness = cuteness;
+        this.relationship = relationship;
+        this.isFamily = isFamily;
+    }
+    /**
+     * @return Name of the friend.
+     */
     public String getName()
     {
         return name;
     }
+    /**
+     * Set the name of the friend
+     * @param name Name of the friend
+     */
     public void setName(String name)
     {
         this.name = name;
@@ -135,10 +216,18 @@ public class Friend
     }
     public void setAge(int age)
     {
+        if(age < -1)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.age = age;
     }
     public void setAge(int age, boolean ageIsApprox)
     {
+        if(age < -1)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.age = age;
         this.ageIsApprox = ageIsApprox;
     }
@@ -148,6 +237,10 @@ public class Friend
     }
     public void setGender(int gender)
     {
+        if(gender < -1 || gender > 1)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.gender = gender;
     }
     public int getQuality()
@@ -156,6 +249,10 @@ public class Friend
     }
     public void setQuality(int quality)
     {
+        if(quality < -5 || quality > 5)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.quality = quality;
     }
     public int getCuteness()
@@ -164,6 +261,10 @@ public class Friend
     }
     public void setCuteness(int cuteness)
     {
+        if(cuteness < -5 || cuteness > 5)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.cuteness = cuteness;
     }
     public int getRelationship()
@@ -172,6 +273,10 @@ public class Friend
     }
     public void setRelationship(int relationship)
     {
+        if(relationship < -1 || relationship > 2)
+    	{
+        	throw new InvalidParameterException();
+    	}
         this.relationship = relationship;
     }
     public boolean isFamily()
