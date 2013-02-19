@@ -19,10 +19,16 @@ import java.util.Scanner;
 public class Backend 
 {
     SinglyLinkedList<Friend> friends;
+    /**
+     * Default Constructor for the backend
+     */
     public Backend()
     {
         friends = new SinglyLinkedList<>();
     }
+    /**
+     * Method to run the Main menu
+     */
     public void mainMenu()
     {
         boolean exit = false;
@@ -68,15 +74,23 @@ public class Backend
                     System.out.println("Invalid Input");
                 case "q":
                     System.out.println("Program Exiting");
+                    System.out.println("Stay in Touch for facebook friend list integration");
                     exit = true;
                     break;
             }
         }
     }
+    /**
+     * Used to manually add Friends to the list to preset a list before usage.
+     * @param inputTthe friend to add
+     */
     public void addManual(Friend input)
     {
         friends.addAtTail(input);
     }
+    /**
+     * Internal method to add a friend
+     */
     private void add()
     {
         Friend temp = inputFriend();
@@ -85,6 +99,9 @@ public class Backend
         System.out.println("Friend Added");
         System.out.println("-------------------------------------------");
     }
+    /**
+     * internal method to remove a friend
+     */
     private void remove()
     {
         Scanner scr = new Scanner(System.in);
@@ -136,6 +153,9 @@ public class Backend
             }
         }
     }
+    /**
+     * Internal method to search for a friend
+     */
     private void search()
     {
         System.out.println("-------------------------------------------");
@@ -144,6 +164,9 @@ public class Backend
         friends.printedFindAll(search);
         System.out.println("-------------------------------------------");
     }
+    /**
+     * Internal method to search for a friend using all details possible
+     */
     private void advancedSearch()
     {
         System.out.println("-------------------------------------------");
@@ -152,6 +175,9 @@ public class Backend
         friends.printedFindAll(search);
         System.out.println("-------------------------------------------");
     }
+    /**
+     * Internal method to print a list of all friends
+     */
     private void viewList()
     {
         System.out.println("-------------------------------------------");
@@ -159,6 +185,9 @@ public class Backend
         friends.traverse();
         System.out.println("-------------------------------------------");
     }
+    /**
+     * Internal method to view details of a friend
+     */
     private void viewDetails()
     {
         System.out.println("-------------------------------------------");
@@ -184,16 +213,23 @@ public class Backend
         }
         System.out.println("-------------------------------------------");
     }
+    /**
+     * Internal method to implement the SoulMateFinder plugin
+     */
     private void soulMateFinder()
     {
         System.out.println("-------------------------------------------");
         System.out.println("Input your information");
-        Friend me = inputFriend();
+        Friend me = inputMe();
         SoulMateFinder smf = new SoulMateFinder(me);
         System.out.println("Your Soul Mate is...");
         System.out.println(smf.find(friends).toStringDetails());
         System.out.println("-------------------------------------------");
     }
+    /**
+     * Internal method to create a new  basic Friend from user Input
+     * @return The friend made
+     */
     private Friend inputFriendBasic()
     {
         System.out.println("-------------------------------------------");
@@ -293,6 +329,10 @@ public class Backend
         }
         return newFriend;
     }
+    /**
+     * Internal method for creating a friend from user input
+     * @return The friend made
+     */
     private Friend inputFriend()
     {
         System.out.println("-------------------------------------------");
@@ -476,6 +516,183 @@ public class Backend
         {            
             newFriend = new Friend(name, age, ageIsApprox, gender, quality, 
                     cuteness, relationship, isFamily);
+        }
+        catch(InvalidParameterException ipe)
+        {
+            System.out.println("Friend was invalid Please try again."
+                    + "Remember to read the instructions carefully");
+            newFriend = inputFriend();
+        }
+        return newFriend;
+    }
+    /**
+     * Internal method used to create a Me character for the SoulMateFinder
+     * @return ME!
+     */
+    private Friend inputMe()
+    {
+        System.out.println("-------------------------------------------");
+        Scanner scr = new Scanner(System.in);
+        String strInput = "";
+        Scanner strScanner;
+        System.out.print("Enter Name [Unknown] : ");
+        String name = scr.nextLine();
+        if((name.isEmpty()))
+        {
+            name = "Unknown";
+        }
+        System.out.print("\nEnter Age [Unknown] : ");
+        strInput = scr.nextLine();
+        strScanner = new Scanner(strInput);
+        while(!(strScanner.hasNextInt() ^ strInput.isEmpty()))
+        {
+            System.out.println("Invalid Input.");
+            System.out.print("\nEnter Age [Unknown] : ");
+            strInput = scr.nextLine();
+            strScanner = new Scanner(strInput);
+        }
+        int age;
+        if(strInput.isEmpty())
+        {
+            age = -1;
+        }
+        else 
+        {
+
+            age = strScanner.nextInt();
+        }
+        boolean ageIsApprox;
+        if(!(age == -1))
+        {
+            System.out.print("\nIs the age an aproximation?(true:false) [False] : ");
+            strInput = scr.nextLine();
+            strScanner = new Scanner(strInput);
+            while(!(strScanner.hasNextBoolean() ^ strInput.isEmpty()))
+            {
+                System.out.println("Invalid Input.");
+                System.out.print("\nIs the age an aproximation?(true:false) [False] : ");
+                strInput = scr.nextLine();
+                strScanner = new Scanner(strInput);
+            }
+            if(strInput.isEmpty())
+            {
+                ageIsApprox = false;
+            }
+            else
+            {
+                ageIsApprox = strScanner.nextBoolean();
+            }
+        }
+        else
+        {
+            ageIsApprox = false;
+        }
+        System.out.print("\nEnter gender (male:female) [Unknown : ]");
+        strInput = scr.nextLine();
+        while(!(strInput.isEmpty() || strInput.equals("male") || 
+                strInput.equals("female")))
+        {
+            System.out.println("Invalid Input.");
+            System.out.print("\nEnter gender (male:female) [Unknown] : ");
+            strInput = scr.nextLine();
+        }
+        int gender;
+        if(strInput.isEmpty())
+        {
+            gender = -1;
+        }
+        else
+        {
+            if(strInput.equals("male"))
+            {
+                gender = 0;
+            }
+            else
+            {
+                gender = 1;
+            }
+        }
+        System.out.print("\nEnter the quality of Person you are (-5 to 5) [0] : ");
+        strInput = scr.nextLine();
+        strScanner = new Scanner(strInput);
+        while(!(strScanner.hasNextInt() ^ strInput.isEmpty()))
+        {
+            System.out.println("Invalid Input.");
+            System.out.print("\nEnter the quality of person you are (-5 to 5) [0] : ");
+            strInput = scr.nextLine();
+            strScanner = new Scanner(strInput);
+        }
+        int quality;
+        if(strInput.isEmpty())
+        {
+            quality = 0;
+        }
+        else 
+        {
+
+            quality = strScanner.nextInt();
+        }
+        System.out.print("\nEnter the cuteness,(-5 to 5) [0] : ");
+        strInput = scr.nextLine();
+        strScanner = new Scanner(strInput);
+        while(!(strScanner.hasNextInt() ^ strInput.isEmpty()))
+        {
+            System.out.println("Invalid Input.");
+            System.out.print("\nEnter the cuteness,(-5 to 5) [0] : ");
+            strInput = scr.nextLine();
+            strScanner = new Scanner(strInput);
+        }
+        int cuteness;
+        if(strInput.isEmpty())
+        {
+            cuteness = 0;
+        }
+        else 
+        {
+
+            cuteness = strScanner.nextInt();
+        }
+        System.out.print("\nEnter the relationship status, (single:relationship:married)"
+                + " [Unknown] : ");
+        strInput = scr.nextLine();
+        strScanner = new Scanner(strInput);
+        while(!(strInput.isEmpty() || strInput.equals("single") || 
+                strInput.equals("relationship") || strInput.equals("married")))
+        {
+            System.out.println("Invalid Input.");
+            System.out.print("\nEnter the relationship status, (single:relationship:married)"
+                    + " [Unknown] : ");
+            strInput = scr.nextLine();
+        }
+        int relationship;
+        if(strInput.isEmpty())
+        {
+            relationship = 0;
+        }
+        else 
+        {
+            if(strInput.equals("single"))
+            {
+                relationship = 0;
+            }
+            else
+            {
+                if(strInput.equals("relationship"))
+                {
+                    relationship = 1;
+                }
+                else
+                {
+                    relationship = 2;
+                }
+            }
+        }
+        System.out.println("-------------------------------------------");
+        Friend newFriend = new Friend();
+        try
+        {            
+            newFriend = new Friend(name, age, ageIsApprox, gender, quality, 
+                    cuteness, relationship);
         }
         catch(InvalidParameterException ipe)
         {

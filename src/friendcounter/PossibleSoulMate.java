@@ -13,6 +13,65 @@ package friendcounter;
  *
  * @author zachary
  */
-public class PossibleSoulMate {
-    
+public class PossibleSoulMate 
+{
+    private Friend psm;
+    private int score;
+    /**
+     * Default consructor of a PossibleSoulMate adds Unknown friend
+     */
+    public PossibleSoulMate()
+    {
+        psm = new Friend();
+        score = 0;
+    }
+    /**
+     * Constructor that specifies the Friend.
+     * @param psm 
+     */
+    public PossibleSoulMate(Friend psm)
+    {
+        this.psm = psm;
+        score = 0;
+    }
+    /**
+     * Sets the Score comparted to another person
+     * @param score 
+     */
+    public void setScore(Friend me)
+    {
+        this.score = this.getMe().hashCode() - me.hashCode();
+        this.score -= (Math.abs(this.getMe().getAge()-me.getAge()));
+        this.score -= (Math.abs(this.getMe().getQuality()-me.getQuality()));
+        this.score -= (Math.abs(this.getMe().getCuteness()-me.getCuteness()));
+        if(this.getMe().getRelationship() == 1)
+        {
+            this.score = this.score/10;
+        }
+    }
+    /**
+     * Get the Score of the Soul Mate
+     * @return 
+     */
+    public int getScore()
+    {
+        return score;
+    }
+    /**
+     * Get the friend element of the PossibleSoulMate object
+     * @return 
+     */
+    public Friend getMe()
+    {
+        return psm;
+    }
+    /**
+     * Overridden toString() to make the PSM a string
+     * @return Friend and the Score
+     */
+    @Override
+    public String toString()
+    {
+        return  psm.toString() + "\t" + "Score: " + score;
+    }
 }
