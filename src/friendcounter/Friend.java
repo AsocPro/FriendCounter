@@ -220,7 +220,8 @@ public class Friend
     public Friend(String name, int age, boolean ageIsApprox, int gender, 
             int quality, int cuteness, int relationship, boolean isFamily)
     {
-        if(age < -1 || gender < -1 || gender > 1 || quality < -5 || quality > 5 || cuteness < -5 || cuteness > 5 || relationship < -1 || relationship > 2)
+        if(age < -1 || gender < -1 || gender > 1 || quality < -5 || quality > 5 
+                || cuteness < -5 || cuteness > 5 || relationship < -1 || relationship > 2)
     	{
         	throw new InvalidParameterException();
     	}
@@ -333,21 +334,22 @@ public class Friend
     public String toString()
     {
         String friend = "";
-        friend = friend + "Name: " + name + "/t";
+        friend = friend + "Name: " + name + "\t\t";
         friend = friend + "Age: ";
         if(age == -1)
         {
-            friend = friend + "Unknown/t";
+            friend = friend + "Unknown\t\t";
         }
         else
         {
+            friend = friend + age;
             if(ageIsApprox)
             {
-                friend = friend + " approx/t";
+                friend = friend + " approx\t";
             }
          else
             {
-                friend = friend + "/t";
+                friend = friend + "\t\t";
             }
         }
         friend = friend + "Gender: ";
@@ -368,21 +370,22 @@ public class Friend
     public String toStringDetails()
     {
         String friend = "";
-        friend = friend + "Name: " + name + "/n";
+        friend = friend + "Name: " + name + "\n";
         friend = friend + "Age: ";
         if(age == -1)
         {
-            friend = friend + "Unknown/n";
+            friend = friend + "Unknown\n";
         }
         else
         {
+            friend = friend + age;
             if(ageIsApprox)
             {
-                friend = friend + " approx/n";
+                friend = friend + " approx\n";
             }
-         else
+             else
             {
-                friend = friend + "/n";
+                friend = friend + "\n";
             }
         }
         friend = friend + "Gender: ";
@@ -398,9 +401,9 @@ public class Friend
                 friend = friend + "Female";
                 break;
         }
-        friend = friend + "/n";
-        friend = friend + "Quality: " + quality;
-        friend = friend + "Cuteness Level: " + cuteness;
+        friend = friend + "\n";
+        friend = friend + "Quality: " + quality + "\n";
+        friend = friend + "Cuteness Level: " + cuteness + "\n";
         friend = friend + "Relationship Status: ";
         switch(relationship)
         {
@@ -417,14 +420,14 @@ public class Friend
                 friend = friend + "Married";
                 break;
         }
-        friend = friend + "/n";
+        friend = friend + "\n";
         if(isFamily)
         {
-            friend = friend + "Is family/n";
+            friend = friend + "Is family\n";
         }
         else
         {
-            friend = friend + "Not Family/n";
+            friend = friend + "Not Family\n";
         }
         return friend;
     }
@@ -432,10 +435,62 @@ public class Friend
      * Override equals() providing a friend that is close to the description.
      *     If a parameter is unknown then it will count that parameter as equal
      * @param object
-     * @return 
+     * @return true or false if the object is equal to this.
      */
     @Override
     public boolean equals(Object object)
+    {
+        if(object == null)
+        {
+            return false;
+        } 
+        if(this == object)
+        {
+            return true;
+        } 
+        if(!(object instanceof Friend))
+        {
+            return false;
+        }
+        Friend other = (Friend)object;
+        if(!(this.getName().equals(other.getName()) || other.getName().equals("Unknown")))
+        {
+            return false;
+        }
+        if(ageIsApprox)
+        {
+            if(other.getAge() == -1 || this.getAge() == -1)
+            {
+                //do nothing
+            }
+            else if(Math.abs(this.getAge()-other.getAge()) > 5)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(!(this.getAge() == other.getAge() || other.getAge() == -1 ||
+                    this.getAge() == -1))
+            {
+                return false;
+            }
+        }
+        if(!(this.getGender() == other.getGender() || other.getGender() == -1 ||
+                    this.getGender() == -1))
+        {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * equals() with all the details
+     *     Providing a friend that is close to the description.
+     *     If a parameter is unknown then it will count that parameter as equal
+     * @param object
+     * @return true or false if the object is equal to this.
+     */
+    public boolean equalsDetails(Object object)
     {
         if(object == null)
         {
@@ -463,12 +518,14 @@ public class Friend
         }
         else
         {
-            if(!(this.getAge() == other.getAge() || other.getAge() == -1))
+            if(!(this.getAge() == other.getAge() || other.getAge() == -1 ||
+                    this.getAge() == -1))
             {
                 return false;
             }
         }
-        if(!(this.getGender() == other.getGender() || other.getGender() == -1))
+        if(!(this.getGender() == other.getGender() || other.getGender() == -1 ||
+                    this.getGender() == -1))
         {
             return false;
         }
@@ -480,7 +537,8 @@ public class Friend
         {
             return false;
         }
-        if(!(this.getRelationship() == other.getRelationship() || other.getRelationship() == -1))
+        if(!(this.getRelationship() == other.getRelationship() || other.getRelationship() == -1 ||
+                    this.getRelationship() == -1))
         {
             return false;
         }

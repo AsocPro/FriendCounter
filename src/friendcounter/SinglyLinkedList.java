@@ -52,11 +52,12 @@ public class SinglyLinkedList <E>
         int index = 0;
         while(cursor != tail)
         {
-            System.out.print(index + "");
+            System.out.print(index + " : ");
             System.out.println(cursor.getElement());
             //this is where we would have visited the node. 
             //but we are not doing visitors
             cursor = cursor.getSuccessor();
+            index++;
         }
     }
     public SLNode<E> find(int pos)
@@ -124,7 +125,7 @@ public class SinglyLinkedList <E>
         {
             if(cursor.getElement().equals(element))
             {
-                list = list + index + ": " + cursor.getElement() + "/n";
+                list = list + index + ": " + cursor.getElement() + "\n";
             }
             cursor = cursor.getSuccessor();
             index++;
