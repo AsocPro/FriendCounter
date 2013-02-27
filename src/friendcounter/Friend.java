@@ -129,7 +129,6 @@ public class Friend
      * Constructor Specifying the name, age, and gender.
      * @param name Name of the friend
      * @param age Age in years. -1 = Unknown
-     * @param ageIsApprox True if the age is an approximation false if it isn't.
      * @param gender Gender of friend. 0 = Male, 1 = Female, -1 = Unknown
      */
     public Friend(String name, int age, int gender)

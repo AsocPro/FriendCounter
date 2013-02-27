@@ -36,7 +36,7 @@ public class PossibleSoulMate
     }
     /**
      * Sets the Score comparted to another person
-     * @param score 
+     * @param me Friend whom to compare
      */
     public void setScore(Friend me)
     {
@@ -51,7 +51,7 @@ public class PossibleSoulMate
     }
     /**
      * Get the Score of the Soul Mate
-     * @return 
+     * @return The score of the PossibleSoulMate
      */
     public int getScore()
     {
@@ -59,7 +59,7 @@ public class PossibleSoulMate
     }
     /**
      * Get the friend element of the PossibleSoulMate object
-     * @return 
+     * @return The PossibleSoulMate friend Element
      */
     public Friend getMe()
     {

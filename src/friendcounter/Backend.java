@@ -82,7 +82,7 @@ public class Backend
     }
     /**
      * Used to manually add Friends to the list to preset a list before usage.
-     * @param inputTthe friend to add
+     * @param input Tthe friend to add
      */
     public void addManual(Friend input)
     {
